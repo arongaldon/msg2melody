@@ -1,7 +1,8 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 # -*- coding: utf-8 -*-
-# Aron Galdon
-# 2017/04/07
+# Aron Galdon Gines
+# 2017/04/07 First version on Python 2
+# 2020/10/30 Migration to Python 3
 # melody2msg.py
 
 import sys
@@ -29,9 +30,9 @@ def feed_queue(q):
 
     while True:
         frame = []
-        for i in xrange(10):
+        for i in range(10):
             frame.append(stream.read(CHUNK))
-        data_ar = numpy.fromstring(''.join(frame), 'int16')
+        data_ar = np.fromstring(''.join(frame), 'int16')
         if q.full():
             q.get_nowait()
         q.put(data_ar)
@@ -44,7 +45,7 @@ def main(argv):
     queue = mp.Queue(maxsize=DELAY_SIZE)
     p = mp.Process(target=feed_queue, args=(queue,))
 
-    raw_input("Pulse Enter para empezar a escuchar...")
+    input("Pulse Enter para empezar a escuchar...")
     p.start()
 
     for t in range(0, 99):

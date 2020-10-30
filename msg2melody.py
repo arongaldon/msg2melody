@@ -1,7 +1,8 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 # -*- coding: utf-8 -*-
-# Aron Galdon
-# 2017/04/07
+# Aron Galdon Gines
+# 2017/04/07 First version on Python 2
+# 2020/10/30 Migration to Python 3
 # msg2melody.py mensaje
 
 import sys
@@ -20,7 +21,7 @@ DURACION = 3
 def generar_tono(n):
     datos_onda = ''
     nframes = int(BITRATE * DURACION)
-    for x in xrange(nframes):
+    for x in range(nframes):
         a = FREC_BASE * n
         b = (BITRATE / a) / math.pi
         c = x / b
@@ -28,7 +29,7 @@ def generar_tono(n):
         datos_onda = datos_onda + chr(valor)    
 
     resto = nframes % BITRATE
-    for x in xrange(resto): 
+    for x in range(resto): 
         datos_onda = datos_onda + chr(128)
 
     return datos_onda
@@ -43,7 +44,7 @@ def main(argv):
     if not argv[1:]: 
         argv.append('abc')
 
-    raw_input("Pulse Enter para empezar a reproducir...")
+    input("Pulse Enter para empezar a reproducir...")
     audio = ''
     for c in argv[1]:
         n = ord(c)
